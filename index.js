@@ -29,7 +29,7 @@ app.get("/api/:date", function (req, res) {
   m = m.isValid() ? m : moment.utc(inputDate, "x") // x for unix milliseconds time 
 
   if (m.isValid()) {
-    res.json({"unix": Number.parseInt(m.format("x")), "utc": m.format("ddd, DD MMM YYYY hh:mm:ss")+ " GMT"});
+    res.json({"unix": Number.parseInt(m.format("x")), "utc": m.format("ddd, DD MMM YYYY HH:mm:ss")+ " GMT"});
   } else {
      res.json({"error": "Invalid Date"});
   }
