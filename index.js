@@ -23,8 +23,8 @@ app.get("/", function (req, res) {
 
 
 // your first API endpoint... 
-app.get("/api/:date", function (req, res) {
-  let inputDate = req.params.date;
+app.get(["/api/:date", "/api/"], function (req, res) {
+  let inputDate = req.params.date ? req.params.date : moment();
   let m = moment.utc(inputDate)
   m = m.isValid() ? m : moment.utc(inputDate, "x") // x for unix milliseconds time 
 
