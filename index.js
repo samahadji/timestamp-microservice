@@ -24,9 +24,12 @@ app.get("/", function (req, res) {
 
 // your first API endpoint... 
 app.get("/api/:date", function (req, res) {
-  let m = moment.utc(req.params.date, "x"); // x for unix millisecond.
+  let inputDate = req.params.date;
+  let m = moment.utc(inputDate)
+  m = m.isValid() ? m : moment.utc(inputDate, "x") // x for unix milliseconds time 
+
   if (m.isValid()) {
-    res.json({"unix": Number.parseInt(req.params.date), "utc": m.format("ddd, DD MMM YYYY hh:mm:ss")+ " GMT"});
+    res.json({"unix": Number.parseInt(m.format("x")), "utc": m.format("ddd, DD MMM YYYY hh:mm:ss")+ " GMT"});
   } else {
      res.json({"error": "Invalid Date"});
   }
